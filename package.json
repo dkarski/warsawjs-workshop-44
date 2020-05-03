@@ -1,0 +1,19 @@
+{
+  "name": "files-manager",
+  "version": "1.0.0",
+  "main": "src/bootstrap.js",
+  "scripts": {
+    "start": "npx http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkarski/warsawjs-workshop-44.git"
+  },
+  "author": "dkarski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dkarski/warsawjs-workshop-44.git/issues"
+  },
+  "homepage": "https://github.com/dkarski/warsawjs-workshop-44.git#readme",
+  "dependencies": {}
+}
