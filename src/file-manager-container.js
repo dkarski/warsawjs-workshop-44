@@ -6,9 +6,6 @@ export class FileManager {
 
   constructor(selector) {
     this.selector = selector;
-    this.optionHeaderInstance = undefined;
-    this.fileListInstance = undefined;
-    this.uploadFileInstance = undefined;
   }
 
   render() {
@@ -20,12 +17,12 @@ export class FileManager {
       <div class="upload-file-container"></div>
     `;
 
-    this.optionHeaderInstance = this.optionHeaderInstance || new OptionHeader('.option-header');
-    this.fileListInstance = this.fileListInstance || new FileList('.file-list-container');
-    this.uploadFileInstance = this.uploadFileInstance || new UploadFile('.upload-file-container');
+    const optionHeader = new OptionHeader('.option-header');
+    const fileList = new FileList('.file-list-container');
+    const uploadFile = new UploadFile('.upload-file-container');
 
-    this.optionHeaderInstance.render();
-    this.fileListInstance.render();
-    this.uploadFileInstance.render();
+    optionHeader.render();
+    fileList.render();
+    uploadFile.render();
   }
 }

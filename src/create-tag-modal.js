@@ -21,8 +21,6 @@ export class CreateTagModal {
 	}
 
 	handleButtonSecondClick() {
-		this.tagIconType = undefined;
-		this.tagName = '';
 		store.update({viewState: VIEW_STATES[0]});
 	}
 
@@ -73,8 +71,6 @@ export class CreateTagModal {
 		const tag = TagFactory.create(this.tagIconType, this.tagName);
 
 		store.update({tags: [...state.tags, tag], viewState: VIEW_STATES[0]});
-		this.tagIconType = undefined;
-		this.tagName = '';
 	}
 
 	handleFormTagClick(tagIconType) {
