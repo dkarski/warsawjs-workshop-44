@@ -1,9 +1,10 @@
 import store, {VIEW_STATES} from "./store.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 
 export class FileDetailModal {
 
-	constructor(selector) {
-		this.selector = selector;
+	constructor(element) {
+		this.element = element;
 	}
 
 	handleButtonSecondClick() {
@@ -20,9 +21,8 @@ export class FileDetailModal {
 
 	render() {
 		const {state} = store;
-		const element = document.querySelector(this.selector);
 
-		element.innerHTML = `
+		const html = parseFromStringToHTML(`
 			<div class="modal">
 				<div class="modal__content">
 					<header class="modal__heading">
@@ -48,18 +48,20 @@ export class FileDetailModal {
 					</footer>
 				</div>
 			</div>
-		`;
+		`);
 
-		element.querySelector(".button--second").addEventListener("click", () => {
+		this.element.appendChild(html);
+
+		this.element.querySelector(".button--second").addEventListener("click", () => {
 			this.handleButtonSecondClick();
 		});
 
-		element.querySelectorAll(".modal__form__tags__item").forEach((note) => {
+		this.element.querySelectorAll(".modal__form__tags__item").forEach((note) => {
 			const id = note.getAttribute("data-id");
 			note.addEventListener("click", this.handleFileFormTagClick(id));
 		});
 
-		element.querySelector(".button--primary").addEventListener("click", () => {
+		this.element.querySelector(".button--primary").addEventListener("click", () => {
 			this.handleButtonPrimaryClick();
 		});
 	}

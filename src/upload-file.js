@@ -1,11 +1,12 @@
 import {FileFactory} from "./file.js";
 import store from "./store.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 // import {CSV_FILE_ICON, JPG_FILE_ICON, MP3_FILE_ICON, PDF_FILE_ICON, SVG_FILE_ICON} from "./icons.js";
 
 export class UploadFile {
 
-  constructor(selector) {
-    this.selector = selector;
+  constructor(element) {
+    this.element = element;
   }
 
   handleUploadFileChange(event) {
@@ -70,16 +71,18 @@ export class UploadFile {
   }
 
   render() {
-    const element = document.querySelector(this.selector);
-
-    element.innerHTML = `
-      <div class="upload-file">
-        <button class="upload-file__button">Upload a file</button>
-        <input class="upload-file__input" type="file" name="myfile" />
+    const html = parseFromStringToHTML(`
+      <div class="upload-file-container">
+        <div class="upload-file">
+          <button class="upload-file__button">Upload a file</button>
+          <input class="upload-file__input" type="file" name="myfile" />
+        </div>
       </div>
-    `;
+    `);
 
-    element.querySelector(".upload-file__input").addEventListener("change", (event) => {
+    this.element.appendChild(html);
+
+    this.element.querySelector(".upload-file__input").addEventListener("change", (event) => {
       this.handleUploadFileChange(event);
     });
   }

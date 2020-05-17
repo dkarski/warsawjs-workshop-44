@@ -1,25 +1,21 @@
 import {OptionHeader} from "./option-header.js";
 import {FileList} from "./file-list.js";
 import {UploadFile} from "./upload-file.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 
 export class FileManager {
 
-  constructor(selector) {
-    this.selector = selector;
+  constructor(element) {
+    this.element = element;
   }
 
   render() {
-    const element = document.querySelector(this.selector);
+    const html = parseFromStringToHTML(`<div class="file-manager-container"></div>`);
+    this.element.appendChild(html);
 
-    element.innerHTML = `
-      <div class="option-header"></div>
-      <div class="file-list-container"></div>
-      <div class="upload-file-container"></div>
-    `;
-
-    const optionHeader = new OptionHeader('.option-header');
-    const fileList = new FileList('.file-list-container');
-    const uploadFile = new UploadFile('.upload-file-container');
+    const optionHeader = new OptionHeader(html);
+    const fileList = new FileList(html);
+    const uploadFile = new UploadFile(html);
 
     optionHeader.render();
     fileList.render();

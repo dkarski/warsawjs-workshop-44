@@ -1,10 +1,11 @@
 import store, {VIEW_STATES} from "./store.js";
 import {PLUS_ICON} from "./icons.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 
 export class TagList {
 
-  constructor(selector) {
-    this.selector = selector;
+  constructor(element) {
+    this.element = element;
   }
 
   handleAddButtonClick() {
@@ -13,21 +14,23 @@ export class TagList {
 
   render() {
     const {state} = store;
-    const element = document.querySelector(this.selector);
 
-    element.innerHTML = `
-      <div class="tag-list">
-        <button class="tag-list__add-button">${PLUS_ICON}</button>
-        ${state.tags.map((tag) => `         
-          <div class="tag-list__item">
-            ${tag.icon}
-            <div class="tag-list__item__name">${tag.name}</div>
-          </div>  
-        `).join('')}
+    const html = parseFromStringToHTML(`
+      <div class="tag-list-container">
+        <div class="tag-list">
+          <button class="tag-list__add-button">${PLUS_ICON}</button>
+          ${state.tags.map((tag) => `         
+            <div class="tag-list__item">
+              ${tag.icon}
+              <div class="tag-list__item__name">${tag.name}</div>
+            </div>  
+          `).join('')}
+        </div>
       </div>
-    `;
+    `);
+    this.element.appendChild(html);
 
-    element.querySelector(".tag-list__add-button").addEventListener("click", () => {
+    this.element.querySelector(".tag-list__add-button").addEventListener("click", () => {
       this.handleAddButtonClick();
     });
   }

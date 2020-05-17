@@ -3,30 +3,28 @@ import {FileManager} from "./file-manager-container.js";
 import {CreateTagModal} from "./create-tag-modal.js";
 import {FileDetailModal} from "./file-detail-modal.js";
 import store, {VIEW_STATES} from "./store.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 
 export class Application {
 
-  constructor(selector) {
-    this.selector = selector;
-    store.subscribe(() => this.render());
+  constructor(element) {
+    this.element = element;
   }
 
   render() {
     const {state} = store;
-    const element = document.querySelector(this.selector);
 
-    element.innerHTML = `
-      <div class="container">
-        <div class="tag-list-container"></div>
-        <div class="file-manager-container"></div>
-      </div>
-      <div class="modal-container"></div>
-    `;
+    const html = parseFromStringToHTML(`
+      <div class="container"></div>
+    `);
 
-    const tagList = new TagList('.tag-list-container');
-    const fileManager = new FileManager('.file-manager-container');
-    const createTagModal = new CreateTagModal('.modal-container');
-    const fileDetailModal = new FileDetailModal('.modal-container');
+    this.element.removeChild(this.element.firstChild);
+    this.element.appendChild(html);
+
+    const tagList = new TagList(html);
+    const fileManager = new FileManager(html);
+    const createTagModal = new CreateTagModal(html);
+    const fileDetailModal = new FileDetailModal(html);
 
     tagList.render();
     fileManager.render();

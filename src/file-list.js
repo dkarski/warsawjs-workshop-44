@@ -1,12 +1,13 @@
 import store, {VIEW_STATES} from "./store.js";
 import {SORT_MAP} from "./files-sort-strategy.js";
 import {FILES_LAYOUT_MAP} from "./files-layout-strategy.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 // import {FILE_ICON} from "./icons.js";
 
 export class FileList {
 
-  constructor(selector) {
-    this.selector = selector;
+  constructor(element) {
+    this.element = element;
   }
 
   handleItemClick(index) {
@@ -17,7 +18,6 @@ export class FileList {
 
   render() {
     const {state} = store;
-    const element = document.querySelector(this.selector);
 
     // TODO: show strategy pattern
     // let files = []
@@ -40,10 +40,10 @@ export class FileList {
     const files = sort(state.files);
 
     // TODO: show strategy pattern
-		// let innerHTML = ``
+		// let htmlString = ``
 		// switch (state.layoutSelectState) {
 		// 	case "large": {
-		// 		innerHTML = `
+		// 		htmlString = `
 		// 			<ul class="file-list">
 		// 				${files.map((file) => `
 		// 					<li class="file-list__item">
@@ -56,7 +56,7 @@ export class FileList {
 		// 		break;
 		// 	}
 		// 	case "small": {
-		// 		innerHTML = `
+		// 		htmlString = `
 		// 			<ul class="file-list">
 		// 				${files.map((file) => `
 		// 					<li class="file-list__item file-list__item--small">
@@ -68,7 +68,7 @@ export class FileList {
 		// 		break;
 		// 	}
 		// 	case "table": {
-		// 		innerHTML = `
+		// 		htmlString = `
 		// 			<ul class="file-table-list">
 		// 				${files.map((file) => `
 		// 					<li class="file-table-list__item">
@@ -82,11 +82,16 @@ export class FileList {
 		// 		break;
 		// 	}
 		// }
-		// element.innerHTML = innerHTML;
 		const render = FILES_LAYOUT_MAP[state.layoutSelectState];
-		element.innerHTML = render(files);
+		const htmlString = render(files);
 
-    element.querySelectorAll(".file-list__item, .file-table-list__item").forEach((note, index) => {
+		const html =parseFromStringToHTML(`
+        <div class="file-list-container">${htmlString}</div>
+    `);
+
+    this.element.appendChild(html)
+
+    this.element.querySelectorAll(".file-list__item, .file-table-list__item").forEach((note, index) => {
       note.addEventListener("click", this.handleItemClick(index));
     });
 

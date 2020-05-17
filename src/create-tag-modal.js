@@ -1,5 +1,6 @@
 import {TAG_MAP, TagFactory} from "./tag.js";
 import store, {VIEW_STATES} from "./store.js";
+import {parseFromStringToHTML} from "./parse-from-string-to-HTML.js";
 // import {generateUuid} from "./generate-uuid.js";
 // import {
 // 	BADGE_TAG_ICON,
@@ -10,8 +11,8 @@ import store, {VIEW_STATES} from "./store.js";
 
 export class CreateTagModal {
 
-	constructor(selector) {
-		this.selector = selector;
+	constructor(element) {
+		this.element = element;
 		this.tagIconType = undefined;
 		this.tagName = '';
 	}
@@ -76,15 +77,15 @@ export class CreateTagModal {
 	handleFormTagClick(tagIconType) {
 		return () => {
 			this.tagIconType = this.tagIconType === tagIconType ? undefined : tagIconType ;
+			this.element.removeChild(this.element.lastChild);
 			this.render()
 		};
 	}
 
 	render() {
 		const {state} = store;
-		const element = document.querySelector(this.selector);
 
-		element.innerHTML = `
+		const html = parseFromStringToHTML(`
 			<div class="modal">
         <div class="modal__content">
             <header class="modal__heading">
@@ -96,7 +97,6 @@ export class CreateTagModal {
                 <ul class="modal__form__tags">
                   ${
 										Object.keys(TAG_MAP).map((key) => {
-											console.log(TAG_MAP)
 											const {icon, type} = new TAG_MAP[key]();
 											return `   
 												<li class="modal__form__tags__item ${this.tagIconType === type ? 'modal__form__tags__item--active' : ''}" data-type="${type}">
@@ -113,21 +113,23 @@ export class CreateTagModal {
             </footer>
         </div>
     	</div>
-		`;
+		`);
 
-		element.querySelector(".modal__form__input").addEventListener("change", (event) => {
+		this.element.appendChild(html);
+
+		this.element.querySelector(".modal__form__input").addEventListener("change", (event) => {
 			this.handleInputChange(event);
 		});
 
-		element.querySelector(".button--second").addEventListener("click", () => {
+		this.element.querySelector(".button--second").addEventListener("click", () => {
 			this.handleButtonSecondClick();
 		});
 
-		element.querySelector(".button--primary").addEventListener("click", () => {
+		this.element.querySelector(".button--primary").addEventListener("click", () => {
 			this.handleButtonPrimaryClick();
 		});
 
-		element.querySelectorAll(".modal__form__tags__item").forEach((note) => {
+		this.element.querySelectorAll(".modal__form__tags__item").forEach((note) => {
 			const type = note.getAttribute("data-type");
 			note.addEventListener("click", this.handleFormTagClick(type));
 		});
