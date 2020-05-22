@@ -1,4 +1,5 @@
 import { FileFactory } from "../app/file-manager/upload-file/file-factory.js";
+import httpClient from "./http-client.js";
 
 const apiUrl = "https://5ec269768ebdcc0016a59cd7.mockapi.io/api/file";
 
@@ -18,11 +19,13 @@ function mapToFiles(files) {
 }
 
 class FileService {
+  constructor(httpClient) {
+    this.httpClient = httpClient;
+  }
+
   getAll() {
-    return fetch(apiUrl)
-      .then((response) => response.json())
-      .then(mapToFiles);
+    return this.httpClient.get(apiUrl).then(mapToFiles);
   }
 }
 
-export default new FileService();
+export default new FileService(httpClient);
