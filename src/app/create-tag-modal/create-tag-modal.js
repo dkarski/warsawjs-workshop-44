@@ -1,19 +1,8 @@
-import { TAG_MAP } from "./tag-factory.js";
+import { TAG_MAP, TagFactory } from "./tag-factory.js";
 import store, { VIEW_STATE } from "../../store/store.js";
 import { convertStringToHTMLElement } from "../../utils/covert-string-to-html-element.js";
 import { generateUuid } from "../../utils/generate-uuid.js";
-import {
-  BADGE_TAG_ICON,
-  BRIEFCASE_TAG_ICON,
-  BULB_TAG_ICON,
-  BULHORN_TAG_ICON,
-  CALCULATOR_TAG_ICON,
-  CALENDAR_TAG_ICON,
-  CHAT_TAG_ICON,
-  CLOUD_TAG_ICON,
-  COOKIE_TAG_ICON,
-  CUP_TAG_ICON,
-} from "../../utils/icons.js";
+
 
 export class CreateTagModal {
   constructor(element) {
@@ -31,103 +20,15 @@ export class CreateTagModal {
   }
 
   handleButtonPrimaryClick() {
-    const { state } = store;
+    const tag = TagFactory.create(this.tagIconType, {
+      name: this.tagName,
+      id: generateUuid(),
+    });
 
-    let tag;
-    switch (this.tagIconType) {
-      case "badge": {
-        tag = {
-          id: generateUuid(),
-          type: "badge",
-          name: this.tagName,
-          icon: BADGE_TAG_ICON,
-        };
-        break;
-      }
-      case "briefcase": {
-        tag = {
-          id: generateUuid(),
-          type: "briefcase",
-          name: this.tagName,
-          icon: BRIEFCASE_TAG_ICON,
-        };
-        break;
-      }
-      case "bulb": {
-        tag = {
-          id: generateUuid(),
-          type: "bulb",
-          name: this.tagName,
-          icon: BULB_TAG_ICON,
-        };
-        break;
-      }
-      case "bulhorn": {
-        tag = {
-          id: generateUuid(),
-          type: "bulhorn",
-          name: this.tagName,
-          icon: BULHORN_TAG_ICON,
-        };
-        break;
-      }
-      case "calculator": {
-        tag = {
-          id: generateUuid(),
-          type: "calculator",
-          name: this.tagName,
-          icon: CALCULATOR_TAG_ICON,
-        };
-        break;
-      }
-      case "calendar": {
-        tag = {
-          id: generateUuid(),
-          type: "calendar",
-          name: this.tagName,
-          icon: CALENDAR_TAG_ICON,
-        };
-        break;
-      }
-      case "chat": {
-        tag = {
-          id: generateUuid(),
-          type: "chat",
-          name: this.tagName,
-          icon: CHAT_TAG_ICON,
-        };
-        break;
-      }
-      case "cloud": {
-        tag = {
-          id: generateUuid(),
-          type: "cloud",
-          name: this.tagName,
-          icon: CLOUD_TAG_ICON,
-        };
-        break;
-      }
-      case "cookie": {
-        tag = {
-          id: generateUuid(),
-          type: "cookie",
-          name: this.tagName,
-          icon: COOKIE_TAG_ICON,
-        };
-        break;
-      }
-      case "cup": {
-        tag = {
-          id: generateUuid(),
-          type: "cup",
-          name: this.tagName,
-          icon: CUP_TAG_ICON,
-        };
-        break;
-      }
-    }
-
-    store.update({ tags: [...state.tags, tag], viewState: VIEW_STATE.INIT });
+    store.update({
+      tags: [...store.state.tags, tag],
+      viewState: VIEW_STATE.INIT,
+    });
   }
 
   handleFormTagClick(tagIconType) {
