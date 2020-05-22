@@ -1,14 +1,7 @@
 import store from "../../../store/store.js";
 import { convertStringToHTMLElement } from "../../../utils/covert-string-to-html-element.js";
-import {
-  CSV_FILE_ICON,
-  FILE_ICON,
-  JPG_FILE_ICON,
-  MP3_FILE_ICON,
-  PDF_FILE_ICON,
-  PNG_FILE_ICON,
-  SVG_FILE_ICON,
-} from "../../../utils/icons.js";
+import { FileFactory } from "./file-factory.js";
+
 
 export class UploadFile {
   constructor(element) {
@@ -16,73 +9,7 @@ export class UploadFile {
   }
 
   addFile({ type, name }) {
-    let file;
-    switch (type) {
-      case "image/jpeg": {
-        file = {
-          name,
-          type: "image/jpeg",
-          icon: JPG_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      case "image/svg+xml": {
-        file = {
-          name,
-          type: "image/svg+xml",
-          icon: SVG_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      case "image/png": {
-        file = {
-          name,
-          type: "image/png",
-          icon: PNG_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      case "application/pdf": {
-        file = {
-          name,
-          type: "application/pdf",
-          icon: PDF_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      case "audio/x-m4a": {
-        file = {
-          name,
-          type: "audio/x-m4a",
-          icon: MP3_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      case "text/csv": {
-        file = {
-          name,
-          type: "text/csv",
-          icon: CSV_FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-      default: {
-        file = {
-          name,
-          type: "default",
-          icon: FILE_ICON,
-          tagIds: [],
-        };
-        break;
-      }
-    }
-
+    const file = FileFactory.create(type, { name });
     store.update({ files: [file, ...store.state.files] });
   }
 
