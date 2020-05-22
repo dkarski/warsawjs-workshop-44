@@ -16,9 +16,8 @@ import {
 } from "../../utils/icons.js";
 
 export class CreateTagModal {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
     this.tagIconType = undefined;
     this.tagName = "";
   }
@@ -29,7 +28,6 @@ export class CreateTagModal {
 
   handleButtonSecondClick() {
     store.update({ viewState: VIEW_STATE.INIT });
-    this.renderApplication();
   }
 
   handleButtonPrimaryClick() {
@@ -130,7 +128,6 @@ export class CreateTagModal {
     }
 
     store.update({ tags: [...state.tags, tag], viewState: VIEW_STATE.INIT });
-    this.renderApplication();
   }
 
   handleFormTagClick(tagIconType) {

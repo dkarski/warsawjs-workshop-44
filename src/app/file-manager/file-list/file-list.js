@@ -3,15 +3,13 @@ import { convertStringToHTMLElement } from "../../../utils/covert-string-to-html
 import { FILE_ICON } from "../../../utils/icons.js";
 
 export class FileList {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   handleItemClick(index) {
     return () => {
       store.update({ fileIndex: index, viewState: VIEW_STATE.FILE_DETAIL });
-      this.renderApplication();
     };
   }
 

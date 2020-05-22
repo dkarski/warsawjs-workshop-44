@@ -10,7 +10,7 @@ export class App {
     this.element = element;
   }
 
-  render = () => {
+  render() {
     const { state } = store;
 
     const childElement = convertStringToHTMLElement(
@@ -20,10 +20,10 @@ export class App {
     this.element.removeChild(this.element.firstElementChild);
     this.element.appendChild(childElement);
 
-    const tagList = new TagList(childElement, this.render);
-    const fileManager = new FileManager(childElement, this.render);
-    const createTagModal = new CreateTagModal(childElement, this.render);
-    const fileDetailModal = new FileDetailModal(childElement, this.render);
+    const tagList = new TagList(childElement);
+    const fileManager = new FileManager(childElement);
+    const createTagModal = new CreateTagModal(childElement);
+    const fileDetailModal = new FileDetailModal(childElement);
 
     tagList.render();
     fileManager.render();
@@ -33,5 +33,5 @@ export class App {
     } else if (state.viewState === VIEW_STATE.FILE_DETAIL) {
       fileDetailModal.render();
     }
-  };
+  }
 }
