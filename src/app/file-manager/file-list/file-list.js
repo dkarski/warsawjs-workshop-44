@@ -1,6 +1,6 @@
 import store, { VIEW_STATE } from "../../../store/store.js";
 import { convertStringToHTMLElement } from "../../../utils/covert-string-to-html-element.js";
-import { FILE_ICON } from "../../../utils/icons.js";
+import { LAYOUT_FILE_MAP } from "./layout-file-strategy.js";
 
 export class FileList {
   constructor(element) {
@@ -14,61 +14,8 @@ export class FileList {
   }
 
   generateHTMLString({ files, layoutSelectState }) {
-    let htmlString = ``;
-
-    switch (layoutSelectState) {
-      case "large": {
-        htmlString = `
-					<ul class="file-list">
-						${files
-              .map(
-                (file) => `
-							<li class="file-list__item">
-								${file.icon}
-								<h3 class="file-list__item__heading">${file.name}</h3>
-							</li>
-						`
-              )
-              .join("")}
-					</ul>
-				`;
-        break;
-      }
-      case "small": {
-        htmlString = `
-					<ul class="file-list">
-						${files
-              .map(
-                (file) => `
-							<li class="file-list__item file-list__item--small">
-								${file.icon}
-							</li>
-						`
-              )
-              .join("")}
-					</ul>
-				`;
-        break;
-      }
-      case "table": {
-        htmlString = `
-					<ul class="file-table-list">
-						${files
-              .map(
-                (file) => `
-							<li class="file-table-list__item">
-								<span class="file-table-list__item__icon">${FILE_ICON}</span>
-								<span class="file-table-list__item__type">${file.type}</span>
-								<span class="file-table-list__item__name">${file.name}</span>
-							</li>
-						`
-              )
-              .join("")}
-					</ul>
-				`;
-        break;
-      }
-    }
+    const render = LAYOUT_FILE_MAP[layoutSelectState];
+    const htmlString = render(files);
 
     return `<div class="file-list-container">${htmlString}</div>`;
   }
