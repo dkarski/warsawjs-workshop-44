@@ -7,9 +7,9 @@
 <https://dkarski.github.io/warsawjs-workshop-44>
 
 
-## Slides - live _(in progress)_
+## Slides - live
 
-  - link zostanie podany przed rozpoczęciem warsztatu
+  - <https://slides.com/danielkarski/wzorce-projektowe/live>
 
 
 ## Agenda
