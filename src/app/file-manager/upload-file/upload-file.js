@@ -11,9 +11,8 @@ import {
 } from "../../../utils/icons.js";
 
 export class UploadFile {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   addFile({ type, name }) {
@@ -85,7 +84,6 @@ export class UploadFile {
     }
 
     store.update({ files: [file, ...store.state.files] });
-    this.renderApplication();
   }
 
   handleUploadFileChange(event) {

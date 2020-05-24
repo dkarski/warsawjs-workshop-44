@@ -3,14 +3,12 @@ import { PLUS_ICON } from "../../utils/icons.js";
 import { convertStringToHTMLElement } from "../../utils/covert-string-to-html-element.js";
 
 export class TagList {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   handleAddButtonClick() {
     store.update({ viewState: VIEW_STATE.CREATE_TAG });
-    this.renderApplication();
   }
 
   generateHTMLString({ tags }) {
