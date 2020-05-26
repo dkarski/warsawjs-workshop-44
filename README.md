@@ -80,6 +80,9 @@ interfejs _Subject_ ze wzorca [obserwator](https://refactoring.guru/design-patte
 1. Pozbadź się zbędnych wywołań funkcji `renderApplication` w aplikacji.
 
 
+#### Rozwiązanie
+<https://github.com/dkarski/warsawjs-workshop-44/pull/3/files>
+
 ### 2. Zaimplementuj wzorzec [prosta fabryka](http://krzysztofjelonek.net/wzorce-projektowe-fabryki)
 
 
@@ -110,6 +113,11 @@ instancje obiektu pod typu `Tag` na podstawie przekazywanego typu taga.
 #### Wskazówki
 
 1. Wykorzystaj w zadaniu wzorzec kreacyjny - [prosta fabryka](http://krzysztofjelonek.net/wzorce-projektowe-fabryki).
+
+
+#### Rozwiązanie
+
+<https://github.com/dkarski/warsawjs-workshop-44/pull/4/files>
 
 
 ### 3. Zaimplementuj wzorzec [prosta fabryka](http://krzysztofjelonek.net/wzorce-projektowe-fabryki)
@@ -144,6 +152,11 @@ instancje obiektu pod typu `File` na podstawie przekazywanego typu pliku.
 1. Obsłuż niezdefiniowany typ `File` tak, by zwracał jakiś domyślny pod typ typu `File`.  
 
 
+#### Rozwiązanie
+
+<https://github.com/dkarski/warsawjs-workshop-44/pull/8/files>
+
+
 ### 4. Zaimplementuj wzorzec [strategia](https://refactoring.guru/design-patterns/strategy)
 
 
@@ -171,7 +184,12 @@ wywołana na podstawie wybranej formy wyświetlania listy plików.
 
 #### Wskazówki
 
-1. Wykorzystaj w zadaniu wzorzec operacyjny - [strategia](https://refactoring.guru/design-patterns/strategy).
+1. Wykorzystaj w zadaniu wzorzec operacyjny - [strategia](https://refactoring.guru/design-patterns/strategy).  
+
+
+#### Rozwiązanie
+
+<https://github.com/dkarski/warsawjs-workshop-44/pull/5/files>
 
 
 ### 5. Zaimplementuj wzorzec [strategia](https://refactoring.guru/design-patterns/strategy)
@@ -204,6 +222,11 @@ odpowiednią funkcje, która zostanie wywołana na podstawie wybranej formy sort
 1. Wykorzystaj w zadaniu wzorzec operacyjny - [strategia](https://refactoring.guru/design-patterns/strategy).
 
 
+#### Rozwiązanie
+
+<https://github.com/dkarski/warsawjs-workshop-44/pull/6/files>
+
+
 
 ### 6. Zaimplementuj wzorzec [fasada](https://refactoring.guru/design-patterns/facade)
 
@@ -230,5 +253,11 @@ który udostępni interfejs do komunikacji z serwerem.
 #### Wskazówki
 
 1. Wykorzystaj w zadaniu wzorzec strukturalny - [fasada](https://refactoring.guru/design-patterns/facade)
+
+
+#### Rozwiązanie
+
+<https://github.com/dkarski/warsawjs-workshop-44/pull/7/files>
+
 
 #### Powodzenia! 💪
