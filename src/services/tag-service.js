@@ -1,4 +1,5 @@
 import { TAG_MAP, TagFactory } from "../app/create-tag-modal/tag-factory.js";
+import httpClient from "./http-client.js";
 
 const apiUrl = "https://5ec269768ebdcc0016a59cd7.mockapi.io/api/tag";
 
@@ -18,11 +19,13 @@ function mapToTags(tags) {
 }
 
 class TagService {
+  constructor(httpClient) {
+    this.httpClient = httpClient;
+  }
+
   getAll() {
-    return fetch(apiUrl)
-      .then((response) => response.json())
-      .then(mapToTags);
+    return this.httpClient.get(apiUrl).then(mapToTags);
   }
 }
 
-export default new TagService();
+export default new TagService(httpClient);
