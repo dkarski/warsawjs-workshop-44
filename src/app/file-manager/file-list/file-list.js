@@ -1,6 +1,7 @@
 import store, { VIEW_STATE } from "../../../store/store.js";
 import { convertStringToHTMLElement } from "../../../utils/covert-string-to-html-element.js";
 import { LAYOUT_FILE_MAP } from "./layout-file-strategy.js";
+import { SortFileStrategy } from "./sort-file-strategy.js";
 
 export class FileList {
   constructor(element) {
@@ -23,24 +24,8 @@ export class FileList {
   render() {
     const { state } = store;
 
-    let files = [];
-    switch (state.optionSelectState) {
-      case "name": {
-        files = [...state.files].sort((fileA, fileB) => {
-          return fileA.name.toUpperCase() > fileB.name.toUpperCase() ? 1 : -1;
-        });
-        break;
-      }
-      case "type": {
-        files = [...state.files].sort((fileA, fileB) => {
-          return fileA.type.toUpperCase() > fileB.type.toUpperCase() ? 1 : -1;
-        });
-        break;
-      }
-      default: {
-        files = [...state.files];
-      }
-    }
+    const sort = SortFileStrategy.getSortStrategy(state.optionSelectState);
+    const files =  sort(state.files);
 
     const htmlString = this.generateHTMLString({ ...state, files });
     const childElement = convertStringToHTMLElement(htmlString);
