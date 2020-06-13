@@ -7,20 +7,17 @@ import store from "../../../store/store.js";
 import { convertStringToHTMLElement } from "../../../utils/covert-string-to-html-element.js";
 
 export class OptionHeader {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   handleSelectOptionChange({ target: { value } }) {
     store.update({ optionSelectState: value });
-    this.renderApplication();
   }
 
   handleLayoutClick(type) {
     return () => {
       store.update({ layoutSelectState: type });
-      this.renderApplication();
     };
   }
 

@@ -4,9 +4,8 @@ import { UploadFile } from "./upload-file/upload-file.js";
 import { convertStringToHTMLElement } from "../../utils/covert-string-to-html-element.js";
 
 export class FileManager {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   render() {

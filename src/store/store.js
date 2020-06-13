@@ -1,10 +1,24 @@
 class Store {
   constructor(state = {}) {
     this.state = state;
+    this.observers = [];
   }
 
   update(state) {
     this.state = { ...this.state, ...state };
+    this.notify({ ...this.state });
+  }
+
+  notify(data) {
+    this.observers.forEach((observer) => observer(data));
+  }
+
+  subscribe(fn) {
+    this.observers.push(fn);
+  }
+
+  unsubscribe(fn) {
+    this.observers = this.observers.filter((subscriber) => subscriber !== fn);
   }
 }
 

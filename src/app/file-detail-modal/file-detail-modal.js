@@ -2,19 +2,16 @@ import store, { VIEW_STATE } from "../../store/store.js";
 import { convertStringToHTMLElement } from "../../utils/covert-string-to-html-element.js";
 
 export class FileDetailModal {
-  constructor(element, renderApplication) {
+  constructor(element) {
     this.element = element;
-    this.renderApplication = renderApplication;
   }
 
   handleButtonSecondClick() {
     store.update({ fileIndex: undefined, viewState: VIEW_STATE.INIT });
-    this.renderApplication();
   }
 
   handleButtonPrimaryClick() {
     store.update({ fileIndex: undefined, viewState: VIEW_STATE.INIT });
-    this.renderApplication();
   }
 
   handleFileFormTagClick(id) {
